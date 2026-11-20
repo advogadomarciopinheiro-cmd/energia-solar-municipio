@@ -92,6 +92,14 @@ def nome_dist(n: str) -> str:
     return " ".join(w.upper() if w.upper() in {"S.A.", "S.A", "SA", "S/A", "CEB", "EDP", "CPFL", "RGE", "CEEE"} else w for w in ws)
 
 
+PREP_NO = {"3304557"}  # municípios que pedem artigo: "no Rio de Janeiro"
+
+
+def em(m, uf=False) -> str:
+    nome = f"{m['nome']} ({m['uf']})" if uf else m["nome"]
+    return ("no " if m["ibge"] in PREP_NO else "em ") + nome
+
+
 def url(path=""):
     return BASE + path.lstrip("/")
 
@@ -267,7 +275,7 @@ def parceiros_html(uf=None):
 
 
 def cta_box(cidade_uf="", distribuidora=""):
-    return f"""<section class="cta-box" id="orcamento"><p><strong>Peça orçamentos{(' em ' + e(cidade_uf)) if cidade_uf else ''}</strong></p>
+    return f"""<section class="cta-box" id="orcamento"><p><strong>Peça orçamentos{(' — ' + e(cidade_uf)) if cidade_uf else ''}</strong></p>
 <p>Por enquanto o pedido é feito só por e-mail. O botão abre seu programa de e-mail com o assunto <em>“{e('Orçamento solar — ' + (cidade_uf or '<sua cidade>'))}”</em> e um roteiro com o que precisamos saber (consumo em kWh, tipo de telhado). Pedir orçamento por este canal não tem custo e não obriga você a contratar nada.</p>
 <a class="btn" href="{e(mailto(cidade_uf, distribuidora))}">Pedir orçamento por e-mail</a>
 <p class="small">Ao enviar o e-mail com o texto de consentimento, você autoriza a {EMPRESA} a usar seus dados só para responder ao pedido. Repassar seus dados a empresas instaladoras depende de um segundo consentimento, separado e opcional (escrever SIM no campo indicado). Detalhes na <a href="{url('privacidade/')}">política de privacidade</a>. A {EMPRESA} não instala sistemas e não garante preço, prazo ou economia de terceiros.</p></section>"""
@@ -316,14 +324,14 @@ def city_page(m, data_pub):
     pb1, pb2 = c["pb_otimista"], c["pb_conservador"]
     pb_txt = f"entre {fnum(pb1,1)} e {fnum(pb2,1)} anos" if pb1 and pb2 else "acima de 40 anos"
     resposta = (
-        f"Pelos dados oficiais, cada 1 kWp de painéis em {e(m['nome'])} tende a gerar de <strong>{fint(c['gen_mes_min'])} a {fint(c['gen_mes_max'])} kWh por mês</strong>, "
+        f"Pelos dados oficiais, cada 1 kWp de painéis {e(em(m))} tende a gerar de <strong>{fint(c['gen_mes_min'])} a {fint(c['gen_mes_max'])} kWh por mês</strong>, "
         f"na média do ano. Com a tarifa residencial da {e(t['sigla'])} ({brl(c['T'],3)}/kWh sem impostos) e as regras de transição da Lei 14.300, "
         f"o investimento se pagaria, na nossa estimativa, <strong>{pb_txt}</strong>. "
         f"É uma estimativa com premissas públicas e conservadoras, não uma promessa: sombra, telhado, consumo e o preço do seu orçamento mudam o resultado."
     )
     body = f"""
 <span class="tag">Código IBGE {e(m['ibge'])}</span>
-<h1>Vale a pena energia solar em {e(nome_uf)}?</h1>
+<h1>Vale a pena energia solar {e(em(m, True))}?</h1>
 <div class="answer"><p>{resposta}</p></div>
 <div class="grid g4">
 <div class="card kpi"><span class="v">{fnum(c['H'],2)}</span><span class="l">kWh/m² por dia de sol no painel inclinado (média anual)</span></div>
@@ -350,7 +358,7 @@ def city_page(m, data_pub):
 </table></div>
 <p class="small">{e(t['reh'].capitalize())}. A conta de luz real é maior, porque inclui tributos, bandeira tarifária e a contribuição de iluminação pública. Usamos a tarifa sem tributos, o que deixa a estimativa de economia mais conservadora.</p>
 
-<h2>Energia solar já instalada em {e(m['nome'])}</h2>
+<h2>Energia solar já instalada {e(em(m))}</h2>
 <div class="tbl"><table>
 <tr><td>Sistemas solares de micro e minigeração distribuída</td><td><strong>{fint(g['solar_n'])}</strong> ({fint(g['solar_micro_n'])} micro e {fint(g['solar_mini_n'])} mini)</td></tr>
 <tr><td>Potência solar instalada</td><td>{fnum(g['solar_kw']/1000,1)} MW</td></tr>
@@ -373,7 +381,7 @@ def city_page(m, data_pub):
 <tr><td>Custo de referência por kWp instalado</td><td>{brl(CUSTO_KWP_MIN,0)} a {brl(CUSTO_KWP_MAX,0)}</td></tr>
 <tr><td><strong>Retorno do investimento (payback simples)</strong></td><td><strong>{pb_txt}</strong></td></tr>
 </table></div>
-<p><strong>Exemplo:</strong> para gerar 300 kWh por mês em {e(m['nome'])}, seriam necessários de {fnum(c['kwp_300_min'],1)} a {fnum(c['kwp_300_max'],1)} kWp de painéis, com custo de referência de {brl(c['kwp_300_min']*CUSTO_KWP_MIN,0)} a {brl(c['kwp_300_max']*CUSTO_KWP_MAX,0)}. Sistemas pequenos costumam custar mais por kWp; o seu orçamento pode sair diferente.</p>
+<p><strong>Exemplo:</strong> para gerar 300 kWh por mês {e(em(m))}, seriam necessários de {fnum(c['kwp_300_min'],1)} a {fnum(c['kwp_300_max'],1)} kWp de painéis, com custo de referência de {brl(c['kwp_300_min']*CUSTO_KWP_MIN,0)} a {brl(c['kwp_300_max']*CUSTO_KWP_MAX,0)}. Sistemas pequenos costumam custar mais por kWp; o seu orçamento pode sair diferente.</p>
 <div class="alert"><strong>Isto é uma estimativa, não uma garantia.</strong> Premissas: taxa de desempenho de 70% a 80% (CEPEL/CRESESB); custo de R$ 2,91 a R$ 3,62 por Wp (média nacional da Greener, junho de 2026); toda a geração tratada como energia injetada e compensada, sem consumo simultâneo; tarifas congeladas nos valores de hoje; sem tributos, degradação dos painéis, manutenção, troca de inversor nem financiamento. Veja a <a href="{url('metodologia/')}">metodologia completa</a>.</div>
 
 <h2>O que a Lei 14.300 muda para quem instala agora</h2>
@@ -388,12 +396,12 @@ def city_page(m, data_pub):
 {fontes_cidade(m)}
 <p class="small">Página publicada em {e(data_pub)}. Dados processados em {e(META['processado_em'])}. Conteúdo informativo; não é projeto de engenharia, proposta comercial nem recomendação de investimento. Encontrou um erro? Escreva para <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
 """
-    desc = (f"Vale a pena energia solar em {nome_uf}? Irradiação do Atlas INPE, tarifa B1 da {t['sigla']} (ANEEL), "
+    desc = (f"Vale a pena energia solar {em(m, True)}? Irradiação do Atlas INPE, tarifa B1 da {t['sigla']} (ANEEL), "
             f"{fint(g['solar_n'])} sistemas instalados e estimativa transparente de geração e retorno.")
     path = f"municipio/{m['slug']}/"
-    page(path, f"Energia solar em {nome_uf}: vale a pena? Dados oficiais e estimativa", desc, body,
+    page(path, f"Energia solar {em(m, True)}: vale a pena? Dados oficiais e estimativa", desc, body,
          crumbs=[("Início", ""), ("Cidades", "cidades/"), (nome_uf, None)],
-         extra_ld=[{"@context": "https://schema.org", "@type": "WebPage", "name": f"Energia solar em {nome_uf}",
+         extra_ld=[{"@context": "https://schema.org", "@type": "WebPage", "name": f"Energia solar {em(m, True)}",
                     "inLanguage": "pt-BR", "url": abs_url(path), "dateModified": date.today().isoformat(),
                     "publisher": {"@type": "Organization", "name": EMPRESA}}])
     return {"path": path, "m": m, "c": c}

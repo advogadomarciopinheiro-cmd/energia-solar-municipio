@@ -35,7 +35,7 @@ def main() -> int:
         pub.append({"ibge": ib, "data": agora.strftime("%d/%m/%Y"), "origem": "noturno"})
         pub_file.write_text(json.dumps(pub, ensure_ascii=False, indent=1), encoding="utf-8")
         href = f"municipio/{m['slug']}/"
-        entry.update(status="publicada", ibge=ib, titulo=f"Energia solar em {m['nome']} ({m['uf']})",
+        entry.update(status="publicada", ibge=ib, titulo=f"Energia solar {'no' if ib == '3304557' else 'em'} {m['nome']} ({m['uf']})",
                      href=href, restantes=len(pendentes) - 1)
         print(f"Nova cidade: {m['nome']} ({m['uf']}) -> {href} | restam {len(pendentes) - 1}")
     subprocess.run([sys.executable, str(ROOT / "scripts" / "build.py")], check=True)
