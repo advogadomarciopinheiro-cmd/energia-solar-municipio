@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://advogadomarciopinheiro-cmd.github.io/energia-solar-municipio/sitemap.xml

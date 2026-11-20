@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Metodologia e fontes — Energia Solar no Município</title>
+<meta name="description" content="Fontes oficiais (INPE/LABREN, ANEEL, IBGE) e as premissas da estimativa de geração, economia e retorno da energia solar residencial.">
+<link rel="canonical" href="https://advogadomarciopinheiro-cmd.github.io/energia-solar-municipio/metodologia/">
+<meta property="og:type" content="website"><meta property="og:title" content="Metodologia e fontes — Energia Solar no Município"><meta property="og:description" content="Fontes oficiais (INPE/LABREN, ANEEL, IBGE) e as premissas da estimativa de geração, economia e retorno da energia solar residencial."><meta property="og:url" content="https://advogadomarciopinheiro-cmd.github.io/energia-solar-municipio/metodologia/"><meta property="og:locale" content="pt_BR">
+<link rel="stylesheet" href="/energia-solar-municipio/assets/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Início", "item": "https://advogadomarciopinheiro-cmd.github.io/energia-solar-municipio/"}, {"@type": "ListItem", "position": 2, "name": "Metodologia"}]}</script>
+</head><body>
+<a class="skip" href="#conteudo">Ir para o conteúdo</a>
+<header class="top"><div class="wrap">
+<a class="logo" href="/energia-solar-municipio/">☀ Energia Solar <span>no Município</span></a>
+<nav aria-label="Principal"><a href="/energia-solar-municipio/cidades/">Cidades</a><a href="/energia-solar-municipio/lei-14300/">Lei 14.300</a><a href="/energia-solar-municipio/metodologia/">Metodologia</a><a class="cta" href="/energia-solar-municipio/orcamentos/">Peça orçamentos</a></nav>
+</div></header>
+<main id="conteudo"><div class="wrap"><div class="crumbs"><a href="/energia-solar-municipio/">Início</a> › Metodologia</div>
+<h1>Metodologia e fontes</h1>
+<p class="lead">Cada número das páginas vem de uma base pública oficial ou de uma premissa explícita com fonte. Não inventamos dados. Quando falta um dado, o município não é publicado.</p>
+<h2>Dados oficiais</h2>
+<ul class="src">
+<li><strong>Irradiação solar:</strong> <a href="https://labren.ccst.inpe.br/atlas_2017.html" rel="noopener" target="_blank">Atlas Brasileiro de Energia Solar, 2ª ed. — INPE/LABREN (2017)</a>. Usamos a irradiação no plano inclinado (inclinação igual à latitude, voltado para o norte) do arquivo das sedes municipais, médias anuais de 1999 a 2015, em Wh/m² por dia. Resolução de 0,1° (cerca de 10 km). Baixado em 20/11/2026. Fonte: LABREN/CCST/INPE – Brasil. A base é usada só como dado de entrada das estimativas, com citação, como o INPE pede.</li>
+<li><strong>Distribuidora:</strong> a que concentra os registros de geração distribuída com o código IBGE do município na base da ANEEL. Se outra tiver 5% ou mais dos registros, a página informa.</li>
+<li><strong>Tarifa:</strong> <a href="https://dadosabertos.aneel.gov.br/dataset/tarifas-distribuidoras-energia-eletrica" rel="noopener" target="_blank">ANEEL — Tarifas homologadas das distribuidoras (dados abertos)</a>. Filtro: Tarifa de Aplicação, subgrupo B1, modalidade Convencional, classe e subclasse Residencial, vigente em 20/11/2026. TUSD + TE, em R$/MWh convertidos para R$/kWh, sem ICMS, PIS/Cofins, bandeira ou iluminação pública. Conjunto gerado pela ANEEL em 20/11/2026.</li>
+<li><strong>Fio B:</strong> <a href="https://dadosabertos.aneel.gov.br/dataset/componentes-tarifarias" rel="noopener" target="_blank">ANEEL — Componentes tarifárias (dados abertos)</a>, componente TUSD_FioB do mesmo recorte e da mesma vigência. Conjunto gerado em 18/11/2026.</li>
+<li><strong>Sistemas instalados:</strong> <a href="https://dadosabertos.aneel.gov.br/dataset/relacao-de-empreendimentos-de-geracao-distribuida" rel="noopener" target="_blank">ANEEL — Relação de empreendimentos de geração distribuída (dados abertos)</a>, empreendimentos com fonte “Radiação solar”, referência 11/2026, conjunto gerado em 19/11/2026.</li>
+<li><strong>População e código do município:</strong> <a href="https://sidra.ibge.gov.br/tabela/6579" rel="noopener" target="_blank">IBGE — Estimativas da população 2026 (SIDRA, tabela 6579)</a>, estimativa de 2026.</li>
+</ul>
+<h2>Como calculamos a estimativa</h2>
+<ol>
+<li><strong>Geração por kWp</strong> = irradiação diária (kWh/m²) × dias × taxa de desempenho. Usamos taxa de desempenho de 70% a 80%, faixa que o <a href="https://cresesb.cepel.br/publicacoes/download/Manual_de_Engenharia_FV_2014.pdf" rel="noopener" target="_blank">CEPEL/CRESESB — Manual de Engenharia para Sistemas Fotovoltaicos (2014), seção 6.4.1</a> indica para sistemas residenciais bem ventilados e sem sombra no Brasil.</li>
+<li><strong>Valor do kWh compensado</strong> = tarifa B1 (TUSD + TE) menos o percentual do Fio B do ano: 75% em 2027, 90% em 2028 (Lei 14.300, art. 27) e, por prudência, 100% de 2029 em diante.</li>
+<li><strong>Custo</strong> = R$ 2.910 a R$ 3.620 por kWp, preço médio nacional do sistema instalado em junho de 2026 para 4 kWp e 2 kWp, segundo a <a href="https://www.pv-magazine-brasil.com/2026/09/25/sistemas-fotovoltaicos-ficam-ate-7-mais-caros-no-1o-semestre-de-2026-aponta-greener/" rel="noopener" target="_blank">Greener, estudo Soluções Energéticas Distribuídas, 1º sem. 2026, publicado pela pv magazine Brasil em 25/09/2026</a>.</li>
+<li><strong>Retorno (payback simples)</strong> = anos até a economia acumulada, a partir de 2027, igualar o custo. O cenário favorável combina 80% de desempenho com o custo menor; o conservador, 70% com o custo maior.</li>
+</ol>
+<h2>O que a estimativa não considera</h2>
+<ul>
+<li>Tributos e bandeiras: a economia real na conta tende a ser maior que a calculada, mas depende das regras de cada estado.</li>
+<li>Consumo simultâneo, que não paga Fio B. Tratamos toda a geração como injetada, o que reduz a economia estimada.</li>
+<li>Reajustes de tarifa, inflação, degradação dos painéis, manutenção, troca de inversor, seguro e juros de financiamento.</li>
+<li>Sombra, orientação e inclinação reais do telhado, e o valor mínimo faturável da conta.</li>
+</ul>
+<p>Por isso, a estimativa não é promessa de economia. Use-a para comparar cidades e conferir se um orçamento faz sentido.</p>
+<h2>Atualização</h2>
+<p>Uma cidade nova é publicada toda noite. Os dados são reprocessados periodicamente; cada página mostra a data. Correções: <a href="mailto:solucoescorporativasmm@gmail.com">solucoescorporativasmm@gmail.com</a>.</p>
+</div></main>
+<footer><div class="wrap">
+<p><strong>MM Consultoria Corporativa Ltda.</strong> · CNPJ 49.399.582/0001-10 · Consultoria empresarial. Contato somente por e-mail: <a href="mailto:solucoescorporativasmm@gmail.com">solucoescorporativasmm@gmail.com</a>. Este site não é a ANEEL, o INPE, o IBGE nem uma distribuidora de energia, e não instala sistemas solares. As estimativas são ilustrativas e não garantem economia.</p>
+<p><a href="/energia-solar-municipio/cidades/">Cidades</a><a href="/energia-solar-municipio/metodologia/">Metodologia e fontes</a><a href="/energia-solar-municipio/lei-14300/">Lei 14.300</a><a href="/energia-solar-municipio/orcamentos/">Peça orçamentos</a><a href="/energia-solar-municipio/aviso-legal/">Aviso legal</a><a href="/energia-solar-municipio/privacidade/">Privacidade</a></p>
+<p>Este site não usa cookies nem ferramentas de rastreamento.</p>
+</div></footer>
+
+</body></html>
