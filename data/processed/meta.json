@@ -1,0 +1,41 @@
+{
+ "processado_em": "20/11/2026 10:00 (horário de Brasília, UTC-3)",
+ "data_referencia": "2026-11-20",
+ "fontes": {
+  "atlas": {
+   "arquivo": "https://labren.ccst.inpe.br/projetos/atlas_2017/TILTED_LATITUDE_sedes-munic_(csv).zip",
+   "pagina": "https://labren.ccst.inpe.br/atlas_2017.html",
+   "descricao": "Atlas Brasileiro de Energia Solar, 2ª ed. (INPE/LABREN, 2017) — irradiação no plano inclinado (inclinação igual à latitude), médias de 1999 a 2015, sedes municipais",
+   "baixado_em": "20/11/2026"
+  },
+  "tarifas": {
+   "arquivo": "https://dadosabertos.aneel.gov.br/dataset/5a583f3e-1646-4f67-bf0f-69db4203e89e/resource/fcf2906c-7c32-4b9b-a637-054e7a5234f4/download/tarifas-homologadas-distribuidoras-energia-eletrica.csv",
+   "pagina": "https://dadosabertos.aneel.gov.br/dataset/tarifas-distribuidoras-energia-eletrica",
+   "gerado": "2026-11-20"
+  },
+  "componentes": {
+   "arquivos": [
+    "https://dadosabertos.aneel.gov.br/dataset/613e6b74-1a4b-4c48-a231-096815e96bd5/resource/a4060165-3a0c-404f-926c-83901088b67c/download/componentes-tarifarias-2025.csv",
+    "https://dadosabertos.aneel.gov.br/dataset/613e6b74-1a4b-4c48-a231-096815e96bd5/resource/e8717aa8-2521-453f-bf16-fbb9a16eea39/download/componentes-tarifarias-2026.csv"
+   ],
+   "pagina": "https://dadosabertos.aneel.gov.br/dataset/componentes-tarifarias",
+   "gerado": "2026-11-18"
+  },
+  "gd": {
+   "arquivo": "https://dadosabertos.aneel.gov.br/dataset/5e0fafd2-21b9-4d5b-b622-40438d40aba2/resource/cd29f6eb-e08d-4db7-b6fb-ed6e3b682d27/download/empreendimento-geracao-distribuida.parquet",
+   "pagina": "https://dadosabertos.aneel.gov.br/dataset/relacao-de-empreendimentos-de-geracao-distribuida",
+   "periodo": "11/2026",
+   "gerado": "2026-11-19",
+   "registros": 4745133
+  },
+  "ibge": {
+   "api": "https://servicodados.ibge.gov.br/api/v3/agregados/6579/periodos/2026/variaveis/9324?localidades=N6%5Ball%5D",
+   "periodo": "2026",
+   "agregado": "6579",
+   "variavel": "9324"
+  }
+ },
+ "sem_dados": [
+  "Porto Alegre-RS: atlas=não gd=ok"
+ ]
+}
