@@ -68,5 +68,10 @@
   "ibge": "5002704",
   "data": "25/11/2026",
   "origem": "noturno"
+ },
+ {
+  "ibge": "2111300",
+  "data": "26/11/2026",
+  "origem": "noturno"
  }
 ]
